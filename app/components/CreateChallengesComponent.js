@@ -72,7 +72,7 @@ class CreateChallenges extends Component {
             <Text style={styles.bodyTitle}>
               Challenge Description
             </Text>
-            <TextInput onBlur={()=> {console.log("HELLOME")}} blurOnSubmit={true} multiline={true} style={styles.bodyDescription} onChangeText = {(text) => {
+            <TextInput blurOnSubmit={true} multiline={true} style={styles.bodyDescription} onChangeText = {(text) => {
               formValue.description = text.trim()
               formValue.createdBy = this.props.currentUser 
             }
