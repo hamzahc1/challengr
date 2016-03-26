@@ -18,15 +18,21 @@ const checkChallenges = (array) => {
   if(array.length === 0) {
     return [{id:-1}]
   } else {
-    return array
+    for(var i =0; i < array.length; i++){
+    array[i].createdAtnum = Date.parse(array[i].createdAt)
+    array[i].challengeExpire = array[i].createdAtnum + 10000
+    }
+    return array;
   }
 }
+
+
 const mapStateToProps = (state) => {
   return {
     visibleChallenges: checkChallenges(filterView(state.challenges.challengeList, state.challengesViewStatus)),
     allUserData: state.allUsers.usersList,
     refreshingChallenges: state.challenges.gettingUsersChallenges,
-    currentUser: state.currentUser.userDetails[0]
+    currentUser: state.currentUser.userDetails[0],
   }
 }
 
@@ -35,7 +41,7 @@ const mapDispatchToProps = (dispatch) => {
     changeView: bindActionCreators(setChallengesViewStatus, dispatch),
     toggleChallenge: bindActionCreators(toggleChallengeStatus, dispatch),
     fetchAllUserData: bindActionCreators(fetchAllUsers, dispatch),
-    getNewChallenges: bindActionCreators(getChallenges, dispatch)
+    getNewChallenges: bindActionCreators(getChallenges, dispatch),
     }
   }
 
