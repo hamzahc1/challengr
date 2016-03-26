@@ -35,11 +35,6 @@ const formValue = {
 class CreateChallenges extends Component {
   constructor(props) {
     super(props);
-    // this.state = {
-    //   description: "",
-    //   assignedTo: "",
-    //   points: 1,
-    // }
   }
 
   componentDidMount() {
@@ -53,15 +48,11 @@ class CreateChallenges extends Component {
     }
 
     _points(selectedPoints) {
-      // this.setState({
-      //   points: selectedPoints
-      // })
+
       formValue.points = selectedPoints;
     }
     _friend (selectedFriend) {
-      // this.setState({
-      //   assignedTo: selectedFriend
-      // })
+
       formValue.assignedTo = selectedFriend;
     }
 
@@ -81,9 +72,8 @@ class CreateChallenges extends Component {
             <Text style={styles.bodyTitle}>
               Challenge Description
             </Text>
-            <TextInput multiline={true} style={styles.bodyDescription} onChangeText = {(text) => {
-              // this.setState({description: text})
-              formValue.description = text
+            <TextInput onBlur={()=> {console.log("HELLOME")}} blurOnSubmit={true} multiline={true} style={styles.bodyDescription} onChangeText = {(text) => {
+              formValue.description = text.trim()
               formValue.createdBy = this.props.currentUser 
             }
             } />
