@@ -61,7 +61,7 @@ const MyChallenges = ({visibleChallenges, changeView, toggleChallenge, refreshin
             progressBackgroundColor="#ffff00"
           />
       }>
-        {visibleChallenges.map(createChallengeRow)}
+        {visibleChallenges ? visibleChallenges.map(createChallengeRow) : <Text>No challenges in here yet!</Text> }
         </ScrollView>
 
       </View>

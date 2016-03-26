@@ -6,23 +6,30 @@ import { fetchAllUsers } from '../actions/fetchUsers'
 import { bindActionCreators } from 'redux'
 
 const filterView = (challenges, challengesViewStatus) => {
+if(challenges.length > 0){
   switch (challengesViewStatus) {
     case true :
       return challenges.filter(c => c.completed)
     case false:
       return challenges.filter(c=> !c.completed)
   }
+} else {
+  return undefined;
+}
 }
 
 const checkChallenges = (array) => {
-  if(array.length === 0) {
-    return [{id:-1}]
-  } else {
+  // if(array.length === 0) {
+  //   return [{id:-1}]
+  // } else {
+    if(array.length > 0){
     for(var i =0; i < array.length; i++){
     array[i].createdAtnum = Date.parse(array[i].createdAt)
-    array[i].challengeExpire = array[i].createdAtnum + 10000
+    array[i].challengeExpire = array[i].createdAtnum + 40000
     }
     return array;
+  } else {
+    return undefined;
   }
 }
 

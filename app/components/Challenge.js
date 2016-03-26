@@ -6,58 +6,55 @@ import React, {
   TouchableHighlight
 } from 'react-native'
 
-// const timer = (endTime) => {
-//   if((new Date().getTime()) >= endTime) {
-//   console.log("CHALLENGE EXPIRED!!")
-//   this.setState
-//   return true
-//   }
-//   else {
-//   console.log("NOT YET!!!!");
-//   return false;
-//   }
-// }
-
-// const realTimer = setInterval()
-
 class Challenge extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      timeLeft: this.props.challengeExpire,
-      expired: false
+      timeLeft: "  00:00:00",
+      timerEnding: false
     }
   }
 
 timer(endTime){
+    let convertMillisecondsToDigitalClock =(ms)=>{
+        hours = Math.floor(ms / 3600000), // 1 Hour = 36000 Milliseconds
+        minutes = Math.floor((ms % 3600000) / 60000), // 1 Minutes = 60000 Milliseconds
+        seconds = Math.floor(((ms % 360000) % 60000) / 1000) // 1 Second = 1000 Milliseconds
+            return hours + ":" + minutes + ":" + seconds;
+    }
   if((new Date().getTime()) >= endTime) {
-    console.log("CHALLENGE EXPIRED!")
-    // this.setState({expired: true})
+    this.setState({timeLeft: "  00:00:00", timerEnding: true})
+    clearInterval(this.whatever)
+  }
+  else {
+    let countLeft = endTime - new Date().getTime()
+    if (countLeft <= 10000){
+    this.setState({timeLeft: "  " + convertMillisecondsToDigitalClock(countLeft), timerEnding: true})
+    } 
+    else {
+      this.setState({timeLeft: "  " + convertMillisecondsToDigitalClock(countLeft)})
+    }
   }
 }
 
-// componentDidMount(){
-//   this.whatever = setInterval((()=>{this.timer(this.props.challengeExpire)}).bind(this),1000)
-// }
+componentWillMount(){
+  this.whatever = setInterval((()=>{this.timer(this.props.challengeExpire)}).bind(this),50)
+}
+
 
 render () {
   return (
     <TouchableHighlight onPress={()=> {this.props.onClick(this.props.id)}} style={styles.listItem}>
       <Text style={styles.challengeText}>
         {this.props.title}
+        <Text style={this.state.timerEnding ? styles.timingOut : styles.timer}>
+        {this.state.timeLeft}
+        </Text>
       </Text>
     </TouchableHighlight>
   )
 }
-
-
-
-
 }
-        // {this.props.challengeTimer(this.props.challengeExpire)}
-
-// const Challenge = ({key, onClick, title, id, createdAtnum, challengeExpire}) => {
-// }
 
 var styles = StyleSheet.create({
   container: {
@@ -69,7 +66,15 @@ var styles = StyleSheet.create({
     padding: 7.5
   },
   challengeText: {
-    fontSize: 30 
+    fontSize: 25 
+  },
+  timingOut: {
+    fontSize: 20,
+    color: "red"
+  },
+  timer: {
+    fontSize: 20,
+    color: "black"
   }
 })
 
