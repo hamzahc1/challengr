@@ -41,10 +41,15 @@ componentWillMount(){
   this.whatever = setInterval((()=>{this.timer(this.props.challengeExpire)}).bind(this),50)
 }
 
+componentWillUnMount(){
+  clearInterval(this.props.id)
+}
+
 
 render () {
   return (
-    <TouchableHighlight onPress={()=> {this.props.onClick(this.props.id)}} style={styles.listItem}>
+    <TouchableHighlight onPress={()=> {this.props.onClick(this.props.id)
+      this.props.clearAllIntervals()}} style={styles.listItem}>
       <Text style={styles.challengeText}>
         {this.props.title}
         <Text style={this.state.timerEnding ? styles.timingOut : styles.timer}>

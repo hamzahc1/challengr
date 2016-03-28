@@ -16,9 +16,9 @@ let _scrollView: ScrollView;
 
 //actual component:
 
-const MyChallenges = ({visibleChallenges, changeView, toggleChallenge, refreshingChallenges, getNewChallenges, currentUser, challengeTimer}) => {
+const MyChallenges = ({visibleChallenges, changeView, toggleChallenge, refreshingChallenges, getNewChallenges, currentUser, clearAllIntervals}) => {
   
-  let createChallengeRow = (challenge) => <Challenge key={challenge.id} {...challenge} challengeTimer={challengeTimer} onClick={toggleChallenge} title={challenge.challengeText} />;
+  let createChallengeRow = (challenge) => <Challenge key={challenge.id} {...challenge} clearAllIntervals={clearAllIntervals} onClick= {toggleChallenge} title={challenge.challengeText} />;
 
   return (
 
@@ -33,13 +33,19 @@ const MyChallenges = ({visibleChallenges, changeView, toggleChallenge, refreshin
      <View style={styles.body}>
        <View style={[styles.openCloseChoice, styles.border]}>
          
-        <TouchableHighlight style={[styles.border, styles.open]} onPress={() => changeView(false)}>
+        <TouchableHighlight style={[styles.border, styles.open]} onPress={() => {changeView(false)
+          // clearAllIntervals(visibleChallenges)
+          }}>
           <Text style={styles.openCloseChoiceText}>
             open
           </Text>
         </TouchableHighlight>
 
-        <TouchableHighlight style={[styles.border, styles.closed]} onPress={() => changeView(true)}>
+        <TouchableHighlight style={[styles.border, styles.closed]} onPress={() => {changeView(true)
+          // clearAllIntervals(visibleChallenges)
+        }
+      }>
+
           <Text style={styles.openCloseChoiceText}>
             closed
           </Text>
@@ -108,7 +114,7 @@ var styles = StyleSheet.create({
  open: {
   flex: 0.5,
   alignItems: 'center',
-  justifyContent: 'center'
+  justifyContent: 'center',
  },
  closed: {
   flex: 0.5,
@@ -117,6 +123,7 @@ var styles = StyleSheet.create({
  },
  openCloseChoiceText: {
   fontSize: 20,
+  color: "white"
  },
 
  challengesList: {

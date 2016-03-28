@@ -19,13 +19,10 @@ if(challenges.length > 0){
 }
 
 const checkChallenges = (array) => {
-  // if(array.length === 0) {
-  //   return [{id:-1}]
-  // } else {
     if(array.length > 0){
     for(var i =0; i < array.length; i++){
-    array[i].createdAtnum = Date.parse(array[i].createdAt)
-    array[i].challengeExpire = array[i].createdAtnum + 40000
+    array[i].createdAtNum = Date.parse(array[i].createdAt)
+    array[i].challengeExpire = array[i].createdAtNum + 90000
     }
     return array;
   } else {
@@ -33,6 +30,12 @@ const checkChallenges = (array) => {
   }
 }
 
+const clearAllIntervals = (array) => {
+  for (var i = 1; i < array.length; i++){
+          window.clearInterval(i.key)
+        }
+        return;
+}
 
 const mapStateToProps = (state) => {
   return {
@@ -40,6 +43,7 @@ const mapStateToProps = (state) => {
     allUserData: state.allUsers.usersList,
     refreshingChallenges: state.challenges.gettingUsersChallenges,
     currentUser: state.currentUser.userDetails[0],
+    clearAllIntervals: (array)=>{clearAllIntervals(array)}
   }
 }
 

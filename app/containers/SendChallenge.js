@@ -6,9 +6,9 @@ import { SendChallenge } from '../actions'
 const nameFilter = (array, user) => {
   var result = [];
   for(var i=0; i<array.length; i++) {
-    if (array[i].username !== user) {
+    // if (array[i].username !== user) {
       result.push(array[i].username)
-    }
+    // }
   }
   return result;
 }
