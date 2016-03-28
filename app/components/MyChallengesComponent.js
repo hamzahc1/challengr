@@ -34,7 +34,6 @@ const MyChallenges = ({visibleChallenges, changeView, toggleChallenge, refreshin
        <View style={[styles.openCloseChoice, styles.border]}>
          
         <TouchableHighlight style={[styles.border, styles.open]} onPress={() => {changeView(false)
-          // clearAllIntervals(visibleChallenges)
           }}>
           <Text style={styles.openCloseChoiceText}>
             open
@@ -42,7 +41,6 @@ const MyChallenges = ({visibleChallenges, changeView, toggleChallenge, refreshin
         </TouchableHighlight>
 
         <TouchableHighlight style={[styles.border, styles.closed]} onPress={() => {changeView(true)
-          // clearAllIntervals(visibleChallenges)
         }
       }>
 

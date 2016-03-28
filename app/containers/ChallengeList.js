@@ -30,9 +30,9 @@ const checkChallenges = (array) => {
   }
 }
 
-const clearAllIntervals = (array) => {
-  for (var i = 1; i < array.length; i++){
-          window.clearInterval(i.key)
+const clearAllIntervals = () => {
+  for (var i = 1; i < 99999; i++){
+          window.clearInterval(i)
         }
         return;
 }
@@ -43,7 +43,7 @@ const mapStateToProps = (state) => {
     allUserData: state.allUsers.usersList,
     refreshingChallenges: state.challenges.gettingUsersChallenges,
     currentUser: state.currentUser.userDetails[0],
-    clearAllIntervals: (array)=>{clearAllIntervals(array)}
+    clearAllIntervals: ()=>{clearAllIntervals()}
   }
 }
 
